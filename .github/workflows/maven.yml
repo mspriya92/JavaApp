@@ -40,14 +40,14 @@ jobs:
       run: |
         # Add commands to extract jar contents here
         # For example, if the jar file is named "output.jar"
-        mkdir extracted_contents
-        unzip original-gs-maven-0.1.0.jar -d extracted_contents
+        #mkdir extracted_contents
+        unzip original-gs-maven-0.1.0.jar 
     - name: Listing the extracted directory
       run : ls -R 
-      working-directory: /home/runner/work/JavaApp/JavaApp/target/extracted_contents/original-gs-maven-0.1.0.jar
+      working-directory: /home/runner/work/JavaApp/JavaApp/target/original-gs-maven-0.1.0.jar/
     - name: Store as Artifact
       uses: actions/upload-artifact@v2
       with:
         name: jar-outputs
-        path: extracted_contents
+        path: target
    
