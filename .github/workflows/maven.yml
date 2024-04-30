@@ -32,10 +32,10 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     - run: mvn --batch-mode --update-snapshots verify
-    - run: mkdir staging && cp target/*.jar staging
-    - name: Listing the staging directory
+    #- run: mkdir staging && cp target/*.jar staging
+    - name: Listing the target directory
       run : ls -R 
-      #working-directory: D:\test\
+      working-directory: /home/runner/work/JavaApp/JavaApp/target/
     - uses: actions/upload-artifact@v3
       with:
         name: Package
