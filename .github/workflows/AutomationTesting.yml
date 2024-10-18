@@ -26,11 +26,26 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
+    - name: Cache Maven dependencies
+      uses: actions/cache@v2
+      with:
+       path: ~/.m2/repository
+       key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+       restore-keys: |
+         ${{ runner.os }}-maven-
+    
+    - name: Run all tests (default behavior)
+      if: ${{ github.event.inputs.run_tests == 'all' }}
+      run: mvn clean test -B
+
+    - name: Run single test
+      if: ${{ github.event.inputs.run_tests == 'single' }}
+      run: mvn -Dtest=${{ github.event.inputs.test_class }} test -B
     - name: Build and run tests with Maven
       run: mvn clean test -B  # 'clean' ensures a fresh build, 'test' runs unit tests
 
-    - name: Build the package (JAR)
-      run: mvn -B package --file pom.xml 
+   # - name: Build the package (JAR)
+      #run: mvn -B package --file pom.xml 
 
     - name: Listing the target directory
       run: ls -R
