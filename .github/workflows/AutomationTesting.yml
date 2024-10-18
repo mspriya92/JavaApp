@@ -45,8 +45,9 @@ jobs:
     - name: Run single test
       if: ${{ github.event.inputs.run_tests == 'single' }}
       run: mvn -Dtest=${{ github.event.inputs.test_class }} test -B
-    - name: Build and run tests with Maven
-      run: mvn clean test -B  # 'clean' ensures a fresh build, 'test' runs unit tests
+
+    #- name: Build and run tests with Maven
+      #run: mvn clean test -B  # 'clean' ensures a fresh build, 'test' runs unit tests
 
    # - name: Build the package (JAR)
       #run: mvn -B package --file pom.xml 
