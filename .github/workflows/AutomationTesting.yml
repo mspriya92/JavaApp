@@ -11,8 +11,8 @@ on:
         description: 'Test class to run (only required if run_tests is "single")'
         type: choice
         options:
-          - all
-          - single
+          - GreeterTest.java
+          - RunnerTest.java
         required: false  # This will only be used if 'run_tests' is 'single'
 
 jobs:
