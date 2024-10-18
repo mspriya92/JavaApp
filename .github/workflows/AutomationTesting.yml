@@ -33,18 +33,10 @@ jobs:
       run: ls -R
       working-directory: ${{ github.workspace }}/target/
 
-    # Step 7: Extract JAR Contents (optional)
-    - name: Extract Jar Contents
-      run: |
-        # Example: Extract contents of the jar file
-        mkdir extracted_contents
-        unzip target/your-artifact-name.jar -d extracted_contents  # Replace with your actual JAR name
-
     # Step 8: Listing the extracted contents
     - name: Listing the extracted directory
       run: ls -R
-      working-directory: ${{ github.workspace }}/target/extracted_contents/
-
+     
     # Step 9: Store the build artifacts (JAR file)
     - name: Store build artifacts as artifact
       uses: actions/upload-artifact@v3
