@@ -1,0 +1,53 @@
+name: AutomationTesting
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_test_publish:
+    runs-on: ubuntu-latest  
+
+    steps:
+    # Step 1: Checkout the repository
+    - name: Checkout the repository
+      uses: actions/checkout@v3
+
+    # Step 2: Set up JDK 17
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    # Step 3: Build and run tests with Maven
+    - name: Build and run tests with Maven
+      run: mvn clean test -B  # 'clean' ensures a fresh build, 'test' runs unit tests
+
+    # Step 4: Build the package (JAR)
+    - name: Build the package (JAR)
+      run: mvn -B package --file pom.xml 
+
+    # Step 6: Listing the target directory (to inspect generated files)
+    - name: Listing the target directory
+      run: ls -R
+      working-directory: ${{ github.workspace }}/target/
+
+    # Step 7: Extract JAR Contents (optional)
+    - name: Extract Jar Contents
+      run: |
+        # Example: Extract contents of the jar file
+        mkdir extracted_contents
+        unzip target/your-artifact-name.jar -d extracted_contents  # Replace with your actual JAR name
+
+    # Step 8: Listing the extracted contents
+    - name: Listing the extracted directory
+      run: ls -R
+      working-directory: ${{ github.workspace }}/target/extracted_contents/
+
+    # Step 9: Store the build artifacts (JAR file)
+    - name: Store build artifacts as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: jar-outputs
+        path: target/
