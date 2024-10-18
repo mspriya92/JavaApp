@@ -2,17 +2,23 @@ name: AutomationTesting
 
 on:
   workflow_dispatch:
+   inputs:
+      run_tests:
+        description: 'Run Single Test or All Tests'
+        required: true
+        default: 'all'  # 'single' to run a specific test, 'all' to run all tests
+      test_class:
+        description: 'Test class to run (only required if run_tests is "single")'
+        required: false  # This will only be used if 'run_tests' is 'single'
 
 jobs:
   build_test_publish:
     runs-on: ubuntu-latest  
 
     steps:
-    # Step 1: Checkout the repository
     - name: Checkout the repository
       uses: actions/checkout@v3
 
-    # Step 2: Set up JDK 17
     - name: Set up JDK 17
       uses: actions/setup-java@v3
       with:
@@ -20,24 +26,16 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    # Step 3: Build and run tests with Maven
     - name: Build and run tests with Maven
       run: mvn clean test -B  # 'clean' ensures a fresh build, 'test' runs unit tests
 
-    # Step 4: Build the package (JAR)
     - name: Build the package (JAR)
       run: mvn -B package --file pom.xml 
 
-    # Step 6: Listing the target directory (to inspect generated files)
     - name: Listing the target directory
       run: ls -R
       working-directory: ${{ github.workspace }}/target/
 
-    # Step 8: Listing the extracted contents
-    - name: Listing the extracted directory
-      run: ls -R
-     
-    # Step 9: Store the build artifacts (JAR file)
     - name: Store build artifacts as artifact
       uses: actions/upload-artifact@v3
       with:
