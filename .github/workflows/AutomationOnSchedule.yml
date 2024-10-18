@@ -39,8 +39,8 @@ jobs:
         # For example, to test only a specific class, you can modify RUN_TESTS in the workflow.
         # In this example, we manually set a test class name for demonstration purposes.
         # Uncomment the next line if you want to run a single test (remove echo line above).
-        # echo "RUN_TESTS=single" >> $GITHUB_ENV
-        # echo "TEST_CLASS=GreeterTest" >> $GITHUB_ENV
+        #echo "RUN_TESTS=single" >> $GITHUB_ENV
+        #echo "TEST_CLASS=GreeterTest" >> $GITHUB_ENV
 
     - name: Run all tests (default behavior if RUN_TESTS=all)
       if: ${{ env.RUN_TESTS == 'all' }}
