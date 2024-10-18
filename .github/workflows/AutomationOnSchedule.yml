@@ -3,7 +3,7 @@ name: AutomationOnSchedule
 # Trigger the workflow to run on a daily schedule at midnight UTC.
 on:
   schedule:
-    - cron: '45 9 * * *' #(which corresponds to 15:00 IST)
+    - cron: '40 9 * * *' #(which corresponds to 15:00 IST)
     #- cron: '0 0 * * *'  # Runs daily at midnight UTC
 
 jobs:
