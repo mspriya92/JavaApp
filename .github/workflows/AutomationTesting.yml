@@ -39,7 +39,19 @@ jobs:
        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
        restore-keys: |
          ${{ runner.os }}-maven-
-    
+         
+    - name: Set environment variable based on trigger type (on-schedule vs workflow_dispatch)
+      run: |
+        # For on-schedule event, default to 'all' tests
+        if [[ "${{ github.event_name }}" == "schedule" ]]; then
+          echo "RUN_TESTS=all" >> $GITHUB_ENV
+        else
+          echo "RUN_TESTS=${{ github.event.inputs.run_tests }}" >> $GITHUB_ENV
+          if [[ "${{ github.event.inputs.run_tests }}" == "single" ]]; then
+            echo "TEST_CLASS=${{ github.event.inputs.test_class }}" >> $GITHUB_ENV
+          fi
+        fi
+
     - name: Run all tests (default behavior)
       if: ${{ github.event.inputs.run_tests == 'all' }}
       run: mvn clean test -B
