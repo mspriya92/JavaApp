@@ -9,6 +9,10 @@ on:
         default: 'all'  # 'single' to run a specific test, 'all' to run all tests
       test_class:
         description: 'Test class to run (only required if run_tests is "single")'
+        type: choice
+        options:
+          - all
+          - single
         required: false  # This will only be used if 'run_tests' is 'single'
 
 jobs:
