@@ -1,7 +1,9 @@
 name: AutomationTesting
 
 on:
-  workflow_dispatch:
+ schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+ workflow_dispatch:
    inputs:
       run_tests:
         description: 'Run Single Test or All Tests'
@@ -43,9 +45,9 @@ jobs:
       run: mvn clean test -B
 
     - name: Run single test
-      if: ${{ github.event.inputs.run_tests == 'single' }}
+      if: ${{ github.event.inputs.run_tests == 'single' && github.event.inputs.test_class != '' }}
       run: mvn -Dtest=${{ github.event.inputs.test_class }} test -B
-
+ 
     #- name: Build and run tests with Maven
       #run: mvn clean test -B  # 'clean' ensures a fresh build, 'test' runs unit tests
 
