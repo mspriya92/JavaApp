@@ -2,7 +2,7 @@ name: AutomationTesting
 
 on:
  schedule:
-    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+    - cron: '30 10 * * *'  # Runs daily at midnight UTC
  workflow_dispatch:
    inputs:
       run_tests:
