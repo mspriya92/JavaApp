@@ -47,7 +47,7 @@ jobs:
 
     # Step 9: Store the build artifacts (JAR file)
     - name: Store build artifacts as artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: jar-outputs
         path: target/
