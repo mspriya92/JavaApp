@@ -69,7 +69,8 @@ jobs:
       run: |
         # Assuming your test results are in a folder named 'reports'
         #test_report_url="https://raw.githubusercontent.com/mspriya92/JavaApp/main/index.html"
-        test_report_url="https://mspriya92.github.io/JavaApp/main/index.html"
+        test_report_url="https://mspriya92.github.io/JavaApp/index.html"
+        #https://mspriya92.github.io/JavaApp/
         echo "Test Report URL: $test_report_url"
     #- name: Display summary with artifact link
       #run: |
