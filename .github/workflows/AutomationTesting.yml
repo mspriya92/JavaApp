@@ -68,7 +68,7 @@ jobs:
     - name: Print URL for index.html
       run: |
         # Assuming your test results are in a folder named 'reports'
-        test_report_url="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/summary-artifact/index.html"
+        test_report_url="https://raw.githubusercontent.com/mspriya92/JavaApp/main/index.html"
         echo "Test Report URL: $test_report_url"
     #- name: Display summary with artifact link
       #run: |
