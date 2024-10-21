@@ -59,11 +59,12 @@ jobs:
       if: ${{ env.RUN_TESTS == 'single' }}
       run: mvn -Dtest=${{ env.TEST_CLASS }} test -B
      
-    
+    - name: Generate Surefire HTML report
+      run: mvn surefire-report:report-only
 
-    - name: Output current time
-      run: |
-        echo "Current time: $(date)"
+    #- name: Output current time
+      #run: |
+        #echo "Current time: $(date)"
  
     #- name: Build and run tests with Maven
       #run: mvn clean test -B  # 'clean' ensures a fresh build, 'test' runs unit tests
