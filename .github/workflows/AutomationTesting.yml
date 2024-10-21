@@ -63,13 +63,13 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
        name: summary-artifact
-       path: ./output.txt
+       path: ./index.html
        
     - name: Display summary in the summary
       run: |
           echo "## Summary" >> $env:GITHUB_STEP_SUMMARY
-          cat output.txt >> $GITHUB_STEP_SUMMARY
-          #cat index.html >> $env:GITHUB_STEP_SUMMARY
+          cat index.html >> $GITHUB_STEP_SUMMARY
+          #cat index.txt >> $GITHUB_STEP_SUMMARY
     #- name: Generate Surefire HTML report
       #run: mvn surefire-report:report-only
 
