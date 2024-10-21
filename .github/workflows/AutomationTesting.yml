@@ -63,7 +63,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
        name: summary-artifact
-       path: ./index.html
+       path: ./output.txt
        
     - name: Display summary in the summary
       run: |
