@@ -59,7 +59,12 @@ jobs:
       if: ${{ env.RUN_TESTS == 'single' }}
       run: mvn -Dtest=${{ env.TEST_CLASS }} test -B
 
-    
+    - name: Upload Summary
+      uses: actions/upload-artifact@v3
+      with:
+       name: summary-artifact
+       path: ./index.html
+       
     - name: Display summary in the summary
       run: |
           echo "## Summary" >> $env:GITHUB_STEP_SUMMARY
