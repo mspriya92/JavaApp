@@ -58,15 +58,20 @@ jobs:
     - name: Run single test (if RUN_TESTS=single)
       if: ${{ env.RUN_TESTS == 'single' }}
       run: mvn -Dtest=${{ env.TEST_CLASS }} test -B
-     
+
+    
+    - name: Display summary in the summary
+      run: |
+          echo "## Summary" >> $env:GITHUB_STEP_SUMMARY
+          cat index.html >> $env:GITHUB_STEP_SUMMARY
     #- name: Generate Surefire HTML report
       #run: mvn surefire-report:report-only
 
-    - name: Upload test report as an artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: index-html-report
-        path: ./index.html
+    #- name: Upload test report as an artifact
+      #uses: actions/upload-artifact@v3
+      #with:
+        #name: index-html-report
+        #path: ./index.html
 
     #- name: Output current time
       #run: |
