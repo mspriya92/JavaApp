@@ -68,7 +68,7 @@ jobs:
     - name: Display summary in the summary
       run: |
           echo "## Summary" >> $env:GITHUB_STEP_SUMMARY
-          cat output.txt >> $env:GITHUB_STEP_SUMMARY
+          cat output.txt >> GITHUB_STEP_SUMMARY
           #cat index.html >> $env:GITHUB_STEP_SUMMARY
     #- name: Generate Surefire HTML report
       #run: mvn surefire-report:report-only
