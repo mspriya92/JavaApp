@@ -62,6 +62,12 @@ jobs:
     - name: Generate Surefire HTML report
       run: mvn surefire-report:report-only
 
+    - name: Upload test report as an artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-report
+        path: target/site/surefire-report.html
+
     #- name: Output current time
       #run: |
         #echo "Current time: $(date)"
