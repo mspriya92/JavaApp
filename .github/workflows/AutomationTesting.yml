@@ -64,11 +64,16 @@ jobs:
       with:
        name: summary-artifact
        path: ./index.html
-
-    - name: Display summary with artifact link
+   
+    - name: Print URL for index.html
       run: |
-          echo "## Summary" >> $env:GITHUB_STEP_SUMMARY
-          echo "The test report can be downloaded [here](./artifacts/index-html-artifact/index.html)." >> $GITHUB_STEP_SUMMARY  
+        # Assuming your test results are in a folder named 'reports'
+        test_report_url="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/summary-artifact/index.html"
+        echo "Test Report URL: $test_report_url"
+    #- name: Display summary with artifact link
+      #run: |
+          #echo "## Summary" >> $env:GITHUB_STEP_SUMMARY
+          #echo "The test report can be downloaded [here](./artifacts/index-html-artifact/index.html)." >> $GITHUB_STEP_SUMMARY  
     
    #- name: Display summary in the summary
       #run: |
