@@ -5,6 +5,8 @@ on:
     - cron: '10 11 * * *'  # Runs daily at midnight UTC
  workflow_dispatch:
    inputs:
+      branches:
+        required: true
       run_tests:
         description: 'Run Single Test or All Tests'
         required: true
