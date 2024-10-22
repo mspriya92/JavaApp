@@ -70,7 +70,7 @@ jobs:
         # Assuming your test results are in a folder named 'reports'
         #test_report_url="https://raw.githubusercontent.com/mspriya92/JavaApp/main/index.html"
         #test_report_url="https://mspriya92.github.io/JavaApp/Test.html"
-        test_report_url="${{ github.server_url }}/${{ github.repository }}/blob/main/index.html"
+        test_report_url="${{ github.server_url }}/${{ github.repository }}/blob/main/Test.html"
         #https://mspriya92.github.io/JavaApp/
         echo "Test Report URL: $test_report_url" >> $GITHUB_STEP_SUMMARY
     #- name: Display summary with artifact link
