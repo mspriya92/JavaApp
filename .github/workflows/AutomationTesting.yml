@@ -82,7 +82,7 @@ jobs:
           password: ${{ secrets.SMTP_PASS }}
           subject: "Test Report"
           to: priyadarshinimq@gmail.com
-          from: mspriya922gmail.com  
+          from: mspriya92gmail.com  
           body: "The test report is attached."
           attachments: Test.html
         
