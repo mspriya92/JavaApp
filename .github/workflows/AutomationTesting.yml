@@ -20,7 +20,7 @@ on:
 jobs:
   build_test_publish:
     runs-on: ubuntu-latest 
-        steps:
+    steps:
     - name: Checksout the repository
       uses: actions/checkout@v3
 
@@ -74,8 +74,8 @@ jobs:
         echo "Test Report URL: $test_report_url" >> $GITHUB_STEP_SUMMARY
         
     - name: Send Email with Test Report
-        uses: dawidd6/action-send-mail@v3
-        with:
+      uses: dawidd6/action-send-mail@v3
+      with:
           server_address: smtp.office365.com
           server_port: 587
           username: ${{ secrets.SMTP_USER }}
