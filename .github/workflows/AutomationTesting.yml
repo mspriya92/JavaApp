@@ -78,12 +78,10 @@ jobs:
         with:
           server_address: smtp.office365.com
           server_port: 587
-          #username: ${{ secrets.SMTP_USER }}
-          #password: ${{ secrets.SMTP_PASS }}
-          username: priyadarshini.mahalingam@digitalsoftwareinc.in         
-          password: Jesus*Madha1992
+          username: ${{ secrets.SMTP_USER }}
+          password: ${{ secrets.SMTP_PASS }}
           subject: "Test Report"
-          to: mspriya92@gmail.com
+          to: divya.prabhavathi@digitalsoftwareinc.in
           from: priyadarshini.mahalingam@digitalsoftwareinc.in  
           body: "The test report is attached."
           attachments: Test.html
