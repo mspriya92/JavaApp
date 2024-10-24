@@ -19,19 +19,17 @@ on:
 
 jobs:
   build_test_publish:
-    #runs-on: ubuntu-latest 
-    runs-on: self-hosted
-
-    steps:
+    runs-on: ubuntu-latest 
+        steps:
     - name: Checksout the repository
       uses: actions/checkout@v3
 
-    #- name: Set up JDK 17
-      #uses: actions/setup-java@v3
-      #with:
-        #java-version: '17'
-        #distribution: 'temurin'
-        #cache: maven
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
 
     - name: Cache Maven dependencies
       uses: actions/cache@v2
@@ -40,6 +38,7 @@ jobs:
        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
        restore-keys: |
          ${{ runner.os }}-maven-
+
     - name: Set environment variable based on trigger type (on-schedule vs workflow_dispatch)
       run: |
         # For on-schedule event, default to 'all' tests
@@ -64,16 +63,29 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
        name: summary-artifact
-       path: ./index.html
+       path: ./Test.html
    
     - name: Print URL for index.html
       run: |
-        # Assuming your test results are in a folder named 'reports'
         #test_report_url="https://raw.githubusercontent.com/mspriya92/JavaApp/main/index.html"
-        #test_report_url="https://mspriya92.github.io/JavaApp/Test.html"
-        test_report_url="${{ github.server_url }}/${{ github.repository }}/Test.html"
+        test_report_url="https://mspriya92.github.io/JavaApp/Test.html"
+        #test_report_url="${{ github.server_url }}/${{ github.repository }}/Test.html"
         #https://mspriya92.github.io/JavaApp/
         echo "Test Report URL: $test_report_url" >> $GITHUB_STEP_SUMMARY
+        
+    - name: Send Email with Test Report
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.example.com
+          server_port: 587
+          username: ${{ secrets.SMTP_USER }}
+          password: ${{ secrets.SMTP_PASS }}
+          subject: "Test Report"
+          to: mspriya92@gmail.com
+          from: mspriya92@gmail.com
+          body: "The test report is attached."
+          attachments: Test.html
+        
     #- name: Display summary with artifact link
       #run: |
           #echo "## Summary" >> $env:GITHUB_STEP_SUMMARY
@@ -84,14 +96,6 @@ jobs:
           #echo "## Summary" >> $env:GITHUB_STEP_SUMMARY
           #cat index.html >> $GITHUB_STEP_SUMMARY
           #cat index.txt >> $GITHUB_STEP_SUMMARY
-    #- name: Generate Surefire HTML report
-      #run: mvn surefire-report:report-only
-
-    #- name: Upload test report as an artifact
-      #uses: actions/upload-artifact@v3
-      #with:
-        #name: index-html-report
-        #path: ./index.html
 
     #- name: Output current time
       #run: |
