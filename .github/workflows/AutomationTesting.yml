@@ -76,13 +76,15 @@ jobs:
     - name: Send Email with Test Report
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: smtp.example.com
+          server_address: smtp.office365.com
           server_port: 587
-          username: ${{ secrets.SMTP_USER }}
-          password: ${{ secrets.SMTP_PASS }}
+          #username: ${{ secrets.SMTP_USER }}
+          #password: ${{ secrets.SMTP_PASS }}
+          username: priyadarshini.mahalingam@digitalsoftwareinc.in         
+          password: Jesus*Madha1992
           subject: "Test Report"
           to: mspriya92@gmail.com
-          from: mspriya92@gmail.com
+          from: priyadarshini.mahalingam@digitalsoftwareinc.in  
           body: "The test report is attached."
           attachments: Test.html
         
