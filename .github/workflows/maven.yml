@@ -1,7 +1,8 @@
 name: AutomationTesting
+ 
 on:
- workflow_dispatch:
-   inputs:
+  workflow_dispatch:
+    inputs:
       test_class:
         description: 'Test class to run (only required if run_tests is "single")'
         type: choice
@@ -13,7 +14,6 @@ on:
 jobs:
   Testcase-run:
     runs-on: ubuntu-latest  
- 
     steps:
     - name: Checkout the repository
       uses: actions/checkout@v3
@@ -28,22 +28,21 @@ jobs:
     - name: Cache Maven dependencies
       uses: actions/cache@v2
       with:
-       path: ~/.m2/repository
-       key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-       restore-keys: |
-         ${{ runner.os }}-maven-
-
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+ 
     - name: Set env variable based on trigger type
       run: |
-         if [ "${{ github.event.inputs.test_class }}" == "Homepage" ]; then
-           echo "If condition working"
-         else
-           echo "If condition not working"
-         fi
-	 
+        if [ "${{ github.event.inputs.test_class }}" == "Homepage" ]; then
+          echo "Test class selected: Homepage"
+        else
+          echo "Test class selected: AllAccounts or not set"
+        fi
+ 
     - name: Upload Summary
       uses: actions/upload-artifact@v3
       with:
-       name: summary-artifact
-       path: ./Test.html
-	   
+        name: summary-artifact
+        path: ./Test.html
