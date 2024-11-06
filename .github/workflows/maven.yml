@@ -37,7 +37,7 @@ jobs:
       run: |
          if [ "${{ github.event.inputs.test_class }}" == "Homepage" ]; then
            echo "If condition working"
-          else
+         else
            echo "If condition not working"
          fi
 	 
