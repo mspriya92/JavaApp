@@ -40,9 +40,10 @@ jobs:
           else
            echo "If condition not working"
          fi
+	 
     - name: Upload Summary
       uses: actions/upload-artifact@v3
       with:
        name: summary-artifact
-       path: ./index.html
+       path: ./Test.html
 	   
