@@ -12,7 +12,7 @@ on:
  
 jobs:
   Testcase-run:
-    runs-on: auto-test  
+    runs-on: ubuntu-latest  
  
     steps:
     - name: Checkout the repository
