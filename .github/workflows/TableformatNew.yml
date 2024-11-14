@@ -1,0 +1,32 @@
+name: Tableformat-new
+on: workflow_dispatch
+ 
+jobs:
+  process-components:
+    runs-on: self-hosted
+ 
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+ 
+    - name: Process component.json
+      #id: process_json
+      run: .\Scripts\ExtractCommit.ps1
+      shell: powershell  # Use PowerShell Core (pwsh) for the script
+        
+    - name: click to view the commit info in table
+      run: 
+        # Display the output table
+        Get-Content -Path output.txt
+      shell: powershell
+   
+    - name: Upload Summary
+      uses: actions/upload-artifact@v3
+      with:
+       name: summary-artifact
+       path: output.txt
+
+    - name: Display summary in the summary
+      run: |
+          echo "## Summary" >> $env:GITHUB_STEP_SUMMARY
+          cat Output.txt >> $env:GITHUB_STEP_SUMMARY
